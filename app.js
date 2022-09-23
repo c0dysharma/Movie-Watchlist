@@ -38,14 +38,14 @@ const fetchResult = async (query) => {
   `;
 
   let searchResult = await fetch(
-    `http://www.omdbapi.com/?apikey=8b5b8670&s=${query}`
+    `https://www.omdbapi.com/?apikey=8b5b8670&s=${query}`
   );
   searchResult = await searchResult.json();
   const ids = searchResult.Search.map((Value) => Value.imdbID);
 
   for (let id of ids) {
     let res = await fetch(
-      `http://www.omdbapi.com/?apikey=8b5b8670&plot=full&i=${id}`
+      `https://www.omdbapi.com/?apikey=8b5b8670&plot=full&i=${id}`
     );
     res = await res.json();
     data.push(res);
