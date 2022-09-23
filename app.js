@@ -1,3 +1,4 @@
+const data = [];
 document.getElementById("search-field").addEventListener("keyup", async (e) => {
   if (e.key === "Enter" || e.keyCode === 13) {
     await search();
@@ -7,6 +8,25 @@ document.getElementById("search-field").addEventListener("keyup", async (e) => {
 const search = async () => {
   const field = document.getElementById("search-field");
   if (field.value) await fetchResult(field.value);
+};
+
+const addToWatchlist = (id) => {
+  const res = data.filter((e) => e.imdbID == id)[0];
+  if (!res) {
+    alert("Unable to add to Watchlist");
+    return;
+  }
+
+  const dataToBeStored = {
+    Poster: res.Poster,
+    Title: res.Title,
+    imdbRating: res.imdbRating,
+    Runtime: res.Runtime,
+    Genre: res.Genre,
+    Plot: res.Plot,
+  };
+  window.localStorage.setItem(id, JSON.stringify(dataToBeStored));
+  if (window.localStorage.getItem(id)) console.log("Added to Watchlist ");
 };
 
 const fetchResult = async (query) => {
@@ -28,7 +48,7 @@ const fetchResult = async (query) => {
       `http://www.omdbapi.com/?apikey=8b5b8670&plot=full&i=${id}`
     );
     res = await res.json();
-
+    data.push(res);
     // Trim plot to 85 chars only
     if (res.Plot && res.Plot.length > 360)
       res.Plot = res.Plot.slice(0, 360) + "....";
@@ -58,10 +78,10 @@ const fetchResult = async (query) => {
             <span>${res.Runtime}</span>
             <span>${res.Genre}</span>
           </div>
-          <a href="#" class="flex items-center">
+          <button onclick="" value='${id}' class="flex items-center addRemBtn notAdded">
             <img src="src/plus-icon.png" class="inline w-4 mr-2 my-4 md:ml-6" alt="">
             <span class="font-bold md:font-normal">Watchlist</span>
-          </a>
+          </button>
         </div>
 
         <!-- Plot Row  -->
@@ -76,6 +96,30 @@ const fetchResult = async (query) => {
     <hr class="border-1 mx-auto w-[90%] border-neutral-700">
   `);
   }
-  mainSection.classList = "space-y-8";
+  mainSection.classList = "space-y-8 mt-12 md:mt-20";
   mainSection.innerHTML = htmlToBeRendered.join("\n");
+
+  const addRemBtns = document.getElementsByClassName("addRemBtn");
+  for (let btn of addRemBtns) {
+    const ifAdded = localStorage.getItem(btn.value);
+    if (ifAdded) {
+      btn.classList.remove("notAdded");
+      btn.children[0].src = "src/checked-icon.png";
+      btn.children[1].textContent = "Added";
+    }
+
+    btn.addEventListener("click", (e) => {
+      if (btn.classList.contains("notAdded")) {
+        btn.classList.remove("notAdded");
+        btn.children[0].src = "src/checked-icon.png";
+        btn.children[1].textContent = "Added";
+        addToWatchlist(btn.value)
+      }else{
+        btn.classList.add("notAdded");
+        btn.children[0].src = "src/plus-icon.png";
+        btn.children[1].textContent = "Watchlist";
+        localStorage.removeItem(btn.value)
+      }
+    });
+  }
 };
