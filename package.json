@@ -1,0 +1,17 @@
+{
+  "name": "movie-watchlist",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+  },
+  "scripts": {
+    "dev": "npx tailwindcss -i input.css -o output.css --watch",
+    "build": "npx tailwindcss -i input.css -o output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.1.8"
+  },
+  "author": "c0dysharma",
+  "license": "ISC",
+  "description": ""
+}

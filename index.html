@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Movies</title>
+  <link rel="stylesheet" href="output.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="font-inter bg-neutral-900 max-w-6xl mx-auto min-w-[350px]">
+  <!-- Header goes here  -->
+  <div id="header"
+    class=" px-14 py-28 bg-no-repeat bg-cover bg-center text-white flex flex-col text-center space-y-6 md:bg-left-top md:flex-row md:justify-between md:items-baseline">
+    <h1 class="font-extrabold text-5xl">Find your film</h1>
+    <a href="watchlist.html" class="font-bold text-2xl">My Watchlist</a>
+  </div>
+  <!-- Search window here  -->
+  <div id="search" class="-x-0 relative bottom-10 md:bottom-6">
+    <div id="search-bar" class="flex flex-col items-center justify-center space-y-4 md:flex-row md:space-y-0">
+      <svg class="fill-neutral-400 absolute left-[5%] ml-6 top-8 md:top-4" xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 30 30" width="30px" height="30px">
+        <path
+          d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z" />
+      </svg>
+
+      <input type="text" placeholder="Blade Runner" id="search-field"
+        class="bg-neutral-800 text-neutral-400 !outline-none w-[90%] rounded-lg inline-block text-center px-1 py-4 border-transparent border-2 focus:border-neutral-500  md:pl-20 md:rounded-r-none md:text-left md:w-[70%] md:focus:border-transparent">
+      <button type="submit" onclick="search()"
+        class="text-white font-bold border-2 border-transparent bg-neutral-600 w-[20%] rounded-lg py-4 md:rounded-l-none inline-block">Search</button>
+    </div>
+  </div>
+
+  <!-- Movies appear here  -->
+  <div id="main" class="h-[50vh] flex flex-col justify-center items-center">
+    <!-- Renders when nothing searched  -->
+    <div id="empty-div" class="flex flex-col items-center space-y-2 font-bold text-center">
+      <img src="src/media-icon.png" class="" alt="">
+      <p class="text-neutral-700 text-lg">Start exploring</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

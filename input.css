@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#header {
+  background-image: linear-gradient(
+      rgb(0, 0, 0, 0.7),
+      rgb(0, 0, 0, 0.7)
+    ),
+    url("./src/header-img.png");
+}
